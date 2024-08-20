@@ -93,7 +93,7 @@ export default function BlogPostList() {
         minWidth: 80,
       },
     ],
-    [],
+    [user?.role?.type],
   );
 
   return (
