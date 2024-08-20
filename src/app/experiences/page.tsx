@@ -36,63 +36,65 @@ export default function BlogPostList() {
   // });
   const { data: user } = useGetIdentity();
 
-  const columns = React.useMemo<GridColDef[]>(() => [
-    {
-      field: 'id',
-      headerName: 'ID',
-      type: 'number',
-      minWidth: 50,
-    },
-    {
-      field: 'experience_name',
-      flex: 1,
-      headerName: 'Name',
-      minWidth: 200,
-    },
-    {
-      field: 'description',
-      flex: 1,
-      headerName: 'Description',
-      minWidth: 250,
-      renderCell: function render({ value }) {
-        if (!value) return '-';
-        return <MarkdownField value={value?.slice(0, 80) + '...' || ''} />;
+  const columns = React.useMemo<GridColDef[]>(
+    () => [
+      {
+        field: 'id',
+        headerName: 'ID',
+        type: 'number',
+        minWidth: 50,
       },
-    },
-    user?.role?.type !== 'refine_editor' && {
-      field: 'location_address',
-      flex: 1,
-      headerName: 'Location Address',
-      minWidth: 300,
-    },
-    {
-      field: 'createdAt',
-      flex: 1,
-      headerName: 'Created at',
-      minWidth: 250,
-      renderCell: function render({ value }) {
-        return <DateField value={value} />;
+      {
+        field: 'experience_name',
+        flex: 1,
+        headerName: 'Name',
+        minWidth: 200,
       },
-    },
-    {
-      field: 'actions',
-      headerName: 'Actions',
-      sortable: false,
-      renderCell: function render({ row }) {
-        return (
-          <>
-            <EditButton hideText recordItemId={row.id} />
-            <ShowButton hideText recordItemId={row.id} />
-            <DeleteButton hideText recordItemId={row.id} />
-          </>
-        );
+      {
+        field: 'description',
+        flex: 1,
+        headerName: 'Description',
+        minWidth: 250,
+        renderCell: function render({ value }) {
+          if (!value) return '-';
+          return <MarkdownField value={value?.slice(0, 80) + '...' || ''} />;
+        },
       },
-      align: 'center',
-      headerAlign: 'center',
-      minWidth: 80,
-    },
+      user?.role?.type !== 'refine_editor' && {
+        field: 'location_address',
+        flex: 1,
+        headerName: 'Location Address',
+        minWidth: 300,
+      },
+      {
+        field: 'createdAt',
+        flex: 1,
+        headerName: 'Created at',
+        minWidth: 250,
+        renderCell: function render({ value }) {
+          return <DateField value={value} />;
+        },
+      },
+      {
+        field: 'actions',
+        headerName: 'Actions',
+        sortable: false,
+        renderCell: function render({ row }) {
+          return (
+            <>
+              <EditButton hideText recordItemId={row.id} />
+              <ShowButton hideText recordItemId={row.id} />
+              <DeleteButton hideText recordItemId={row.id} />
+            </>
+          );
+        },
+        align: 'center',
+        headerAlign: 'center',
+        minWidth: 80,
+      },
+    ],
     [],
-  ]);
+  );
 
   return (
     <CanAccess resource='experiences' action='list'>
