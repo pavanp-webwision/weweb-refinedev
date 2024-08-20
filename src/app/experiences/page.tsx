@@ -60,7 +60,7 @@ export default function BlogPostList() {
           return <MarkdownField value={value?.slice(0, 80) + '...' || ''} />;
         },
       },
-      user?.role?.type !== 'refine_editor' && {
+      {
         field: 'location_address',
         flex: 1,
         headerName: 'Location Address',
@@ -93,7 +93,7 @@ export default function BlogPostList() {
         minWidth: 80,
       },
     ],
-    [user?.role?.type],
+    [],
   );
 
   return (
